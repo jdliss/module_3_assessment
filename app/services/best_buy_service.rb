@@ -8,6 +8,7 @@ class BestBuyService
       req.url "/v1/stores(area(#{zip},25))"
       req.params['format'] = "json"
       req.params['apiKey'] = ENV["KEY"]
+      req.params['pageSize'] = 15
     end
     parse(resp)
   end
@@ -15,4 +16,5 @@ class BestBuyService
   def parse(input)
     JSON.parse(input.body)
   end
+
 end

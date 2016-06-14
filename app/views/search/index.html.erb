@@ -1,20 +1,21 @@
+<h3><%= @total %> Total Stores</h3>
 <ul>
   <% @stores.each do |store| %>
     <li>
-    <%= store.long_name %> 
+    <%= store.long_name %>
     </li>
     <ul>
       <li>
-      City: <%= store.city %> 
+      City: <%= store.city %>
       </li>
       <li>
-      Distance: <%= store.distance %> 
+      Distance: <%= store.distance %>
       </li>
       <li>
-      Phone number <%= store.phone_number %> 
+      Phone number <%= store.phone_number %>
       </li>
       <li>
-      Store type: <%= store.store_type %> 
+      Store type: <%= store.store_type %>
       </li>
     </ul>
     <br>

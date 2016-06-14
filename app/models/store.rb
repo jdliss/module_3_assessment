@@ -14,9 +14,16 @@ class Store
   end
 
   def self.find(zip)
-    service = BestBuyService.new
     service.get_stores(zip)["stores"].map do |s|
       new(s)
     end
+  end
+
+  def self.total(zip)
+    service.get_stores(zip)["total"]
+  end
+
+  def self.service
+    BestBuyService.new
   end
 end
