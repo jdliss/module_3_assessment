@@ -11,7 +11,7 @@ class Store
     @distance = hash["distance"]
     @phone_number = hash["phone"]
     @store_type = hash["storeType"]
-    require "pry"; binding.pry
+    @id = hash["storeId"]
   end
 
   def self.find(zip)
