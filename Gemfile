@@ -11,7 +11,8 @@ gem "jbuilder", "~> 2.0"
 gem "faker"
 gem "therubyracer"
 gem "less-rails-bootstrap"
-gem "minitest-rails"
+gem 'faraday'
+gem 'figaro'
 
 group :development do
   gem "spring"
@@ -19,11 +20,12 @@ end
 
 group :development, :test do
   gem 'byebug'
-  gem 'rspec-rails'
   gem 'rspec'
+  gem 'rspec-rails'
   gem 'capybara'
   gem 'pry-rails'
   gem 'vcr'
+  gem 'launchy'
   gem 'webmock'
   gem "pry", :require => "pry"
 end
