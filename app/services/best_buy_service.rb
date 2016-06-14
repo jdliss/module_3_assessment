@@ -1,17 +1,15 @@
 class BestBuyService
   def initialize
-    @conn = Faraday.new(url: "https://api.bestbuy.com")
+    @conn = Faraday.new(url: "https://api.bestbuy.com/")
   end
 
   def get_stores(zip)
-    response = conn.get do |req|
-      req.url "/stores(area(#{zip},25))"
+    resp = @conn.get do |req|
+      req.url "/v1/stores(area(#{zip},25))"
       req.params['format'] = "json"
-      req.params['apiKey'] = ENV["KEY"].dup
+      req.params['apiKey'] = ENV["KEY"]
     end
-    # key = ENV["KEY"].dup
-    # response = @conn.get("/stores(area(#{zip},25))"), { format: "json", "apiKey" => key }
-    parse(response.first)
+    parse(resp)
   end
 
   def parse(input)
