@@ -3,7 +3,7 @@ require 'rails_helper'
 describe BestBuyService do
   context "#get_stores" do
     it "returns stores by zip" do
-      VCR.use_cassette("best_buy_service/store_hash") do
+      VCR.use_cassette("best_buy_service/store_hash", record: :new_episodes) do
         service = BestBuyService.new
         store_hash = {"storeId"=>2740,
          "storeType"=>"Mobile",
