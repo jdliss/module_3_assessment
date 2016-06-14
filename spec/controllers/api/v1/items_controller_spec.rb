@@ -43,7 +43,7 @@ RSpec.describe Api::V1::ItemsController do
   end
 
   context "GET /api/v1/items/:id" do
-    it "returns all Items" do
+    it "returns corresponding item" do
       item = Item.create(
         name: "item1",
         description: "description1",
@@ -51,19 +51,19 @@ RSpec.describe Api::V1::ItemsController do
       )
       get :show, format: :json, id: item.id
 
-      items_hash = JSON.parse(response.body)
+      item_hash = JSON.parse(response.body)
 
       expect(response).to have_http_status 200
-      expect(items_hash["name"]).to eq "item1"
-      expect(items_hash["description"]).to eq "description1"
-      expect(items_hash["image_url"]).to eq "url1"
-      expect(items_hash["created_at"]).to eq nil
-      expect(items_hash["updated_at"]).to eq nil
+      expect(item_hash["name"]).to eq "item1"
+      expect(item_hash["description"]).to eq "description1"
+      expect(item_hash["image_url"]).to eq "url1"
+      expect(item_hash["created_at"]).to eq nil
+      expect(item_hash["updated_at"]).to eq nil
     end
   end
 
-  context "DELETE /api/v1/items:id" do
-    it "returns all Items" do
+  context "DELETE /api/v1/items/:id" do
+    it "deletes corresponding item" do
       item = Item.create(
         name: "item1",
         description: "description1",
@@ -71,14 +71,30 @@ RSpec.describe Api::V1::ItemsController do
       )
       delete :destroy, format: :json, id: item.id
 
-      items_hash = JSON.parse(response.body)
+      expect(response).to have_http_status 204
+    end
+  end
 
-      expect(response).to have_http_status 200
-      expect(items_hash["name"]).to eq "item1"
-      expect(items_hash["description"]).to eq "description1"
-      expect(items_hash["image_url"]).to eq "url1"
-      expect(items_hash["created_at"]).to eq nil
-      expect(items_hash["updated_at"]).to eq nil
+  context "POST /api/v1/items" do
+    it "creates an item" do
+      item = Item.create(
+        name: "item1",
+        description: "description1",
+        image_url: "url1"
+      )
+      post :create, format: :json,
+        name: item.name,
+        description: item.description,
+        image_url: item.image_url
+
+      item_hash = JSON.parse(response.body)
+
+      expect(response).to have_http_status 201
+      expect(item_hash["name"]).to eq "item1"
+      expect(item_hash["description"]).to eq "description1"
+      expect(item_hash["image_url"]).to eq "url1"
+      expect(item_hash["created_at"]).to eq nil
+      expect(item_hash["updated_at"]).to eq nil
     end
   end
 end
