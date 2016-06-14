@@ -2,7 +2,7 @@
 <ul>
   <% @stores.each do |store| %>
     <li>
-    <%= store.long_name %>
+    <%= link_to store.long_name, store_path(store.id) %>
     </li>
     <ul>
       <li>

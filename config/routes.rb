@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users,  only: [:index, :show]
 
   post "/search", to: "search#index", as: :search
+  resource :stores, only: [:show], as: :store
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do

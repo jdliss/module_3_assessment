@@ -3,7 +3,8 @@ class Store
               :city,
               :distance,
               :phone_number,
-              :store_type
+              :store_type,
+              :id
 
   def initialize(hash)
     @long_name = hash["longName"]
@@ -12,6 +13,10 @@ class Store
     @phone_number = hash["phone"]
     @store_type = hash["storeType"]
     @id = hash["storeId"]
+  end
+
+  def self.find_by_id(id)
+    new(service.get_a_store(id))
   end
 
   def self.find(zip)
